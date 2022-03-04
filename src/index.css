@@ -32,7 +32,7 @@ code {
 textarea {
   border: none;
   resize: none;
-  background-color: #9adcff;
+  background-color: inherit;
 }
 
 textarea:focus {
@@ -70,4 +70,22 @@ textarea:focus {
 
 .delete-icon:hover {
   cursor: pointer;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background-color: rgb(233, 233, 233);
+  margin-bottom: 1.5em;
+  padding: 10px;
+}
+
+.search input {
+  background-color: inherit;
+  border: none;
+}
+
+.search input:focus {
+  outline: none;
 }
