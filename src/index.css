@@ -17,6 +17,7 @@ code {
   margin-left: auto;
   margin-right: auto;
   padding: 15px;
+  min-height: 100vh;
 }
 
 .notes-list {
@@ -39,14 +40,14 @@ textarea:focus {
   outline: none;
 }
 
-.save {
+.button {
   background-color: #e1e1e1;
   border: none;
   padding: 5px 10px 5px;
   border-radius: 15px;
 }
 
-.save:hover {
+.button:hover {
   background-color: #ededed;
   cursor: pointer;
 }
@@ -88,4 +89,18 @@ textarea:focus {
 
 .search input:focus {
   outline: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dark-mode {
+  background-color: black;
+}
+
+.dark-mode h1 {
+  color: white;
 }
