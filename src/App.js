@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-
+import { useEffect, useState } from "react";
+import Header from "./components/Header";
 import NotesList from "./components/NotesList";
 import Search from "./components/Search";
-import Header from "./components/Header";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
@@ -14,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     const savedNotes = JSON.parse(localStorage.getItem("react-notes-data"));
-
+    
     if (savedNotes) setNotes(savedNotes);
   }, []);
 
@@ -36,6 +35,7 @@ const App = () => {
 
   const deleteNote = (id) => {
     const newNotes = notes.filter((note) => note.id !== id);
+
     setNotes(newNotes);
   };
 
