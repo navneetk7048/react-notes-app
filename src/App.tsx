@@ -1,19 +1,20 @@
-import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Header from "./components/Header";
 import NotesList from "./components/NotesList";
 import Search from "./components/Search";
+import Note from "./types/Note";
 
-const App = () => {
-  const [notes, setNotes] = useState([]);
-
+export default function App() {
+  const [notes, setNotes] = useState<Note[]>([]);
   const [searchText, setSearchText] = useState("");
-
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    const savedNotes = JSON.parse(localStorage.getItem("react-notes-data"));
-    
+    const savedNotes: Note[] = JSON.parse(
+      localStorage.getItem("react-notes-data") || ""
+    );
+
     if (savedNotes) setNotes(savedNotes);
   }, []);
 
@@ -21,28 +22,31 @@ const App = () => {
     localStorage.setItem("react-notes-data", JSON.stringify(notes));
   }, [notes]);
 
-  const addNote = (text) => {
+  function handleToggle() {
+    setDarkMode((prevMode) => !prevMode);
+  }
+
+  function addNote(text: string) {
     const date = new Date();
     const newNote = {
-      id: nanoid(),
+      id: uuidv4(),
       text: text,
       date: date.toLocaleDateString(),
     };
 
-    const newNotes = [...notes, newNote];
-    setNotes(newNotes);
-  };
+    setNotes((prevNotes) => [...prevNotes, newNote]);
+  }
 
-  const deleteNote = (id) => {
+  function deleteNote(id: string) {
     const newNotes = notes.filter((note) => note.id !== id);
 
     setNotes(newNotes);
-  };
+  }
 
   return (
     <div className={`${darkMode && "dark-mode"}`}>
       <div className="container">
-        <Header handleToggle={setDarkMode} />
+        <Header handleToggle={handleToggle} />
         <Search handleSearchNote={setSearchText} />
         <NotesList
           notes={notes.filter((note) =>
@@ -54,6 +58,4 @@ const App = () => {
       </div>
     </div>
   );
-};
-
-export default App;
+}
